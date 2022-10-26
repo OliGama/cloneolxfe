@@ -116,3 +116,15 @@ export const OthersArea = styled.div `
         }
     }
 `;
+
+export const BreadChump = styled.div`
+    font-size: 13px;
+    margin-top: 20px;
+
+    a {
+        display: inline-block;
+        margin: 0 5px;
+        text-decoration:underline;
+        color: #000;
+    }
+`;

@@ -1,59 +1,55 @@
 import React, { useState, useEffect } from 'react';
+import MaskedInput from 'react-text-mask';
+import { createNumberMask } from 'text-mask-addons';
 import { PageArea } from './styled';
 import { 
     PageContainer, 
     PageTitle, 
     ErrorMessage } from '../../components/MainComponents';
 import useApi from '../../helpers/OlxAPI';
-import { doLogin } from '../../helpers/AuthHandler';
 
 const Page = () => {
     const api = useApi();
 
-    const [name, setName] = useState('');
-    const [stateLoc, setStateLoc] = useState('');
-    const [stateList, setStateList] = useState([]);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [tile, setTitle] = useState('');
+    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [price, setPrice] = useState('');
+    const [priceNegotiable, setPriceNegotiable] = useState(false);
+    const [description, setDescription] = useState('');
     const [disabled, setDisabled] = useState(false);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const getStates = async () => {
-            const sList = await api.getState();
-            setStateList(sList);
+        const getCategories = async () => {
+            const cats = await api.getCategories();
+            setCategories(cats);
         }
-        getStates();
+        getCategories();
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setDisabled(true);
         setError('');
-        if (password !== confirmPassword) {
-            setError("Senhas não batem");
-            setDisabled(false);
-            return;
-        }
-        const json = await api.register(
-            name,
-            stateLoc,
-            email,
-            password
-        );
-        if (json.error) {
-            setError(json.error);
-        } else {
-            doLogin(json.token);
-            window.location.href = '/';
-        }
+        
+        
         setDisabled(false);
     }
 
+    const priceMask = createNumberMask ({
+        prefix: 'R$ ',
+        includeThousandsSeparator: true,
+        ThousandsSeparatorSymbol: '.',
+        allowDecimal: true,
+        descimalSymbol: ','
+    });
+
     return (
         <PageContainer>
-            <PageTitle>Cadastro</PageTitle>
+            <PageTitle TextAlign={'center'} Margin={10 + 'px' + 0}>
+                Postar um anúncio
+            </PageTitle>
             <PageArea>
                 {error &&
                     <ErrorMessage>
@@ -61,38 +57,37 @@ const Page = () => {
                     </ErrorMessage>
                 }
                 <form onSubmit={handleSubmit}>
-                <label className="area">
+                    <label className="area">
                         <div className="area--title">
-                            Nome Completo
+                            Título
                         </div>
                         <div className="area--input">
                             <input 
                                 type="text" 
                                 disabled={disabled} 
-                                value={name}
-                                onChange={e => setName(e.target.value)}
+                                value={title}
+                                onChange={e => setTitle(e.target.value)}
                                 required
                             />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title">
-                            Estado
+                            Categoria
                         </div>
                         <div className="area--input">
                             <select 
                                 disabled={disabled} 
-                                value={stateLoc}
-                                onChange={e => setStateLoc(e.target.value)}
+                                onChange={e => setCategories(e.target.value)}
                                 required
                             >
-                                <option></option>
-                                {stateList.map((i, k) =>
+                                <option value=""></option>
+                                {categories && categories.map( category =>
                                     <option
-                                        key={k}
-                                        value={i.id}
+                                        key={category.id}
+                                        value={category.id}
                                     >
-                                        {i.name}
+                                        {category.name}
                                     </option>
                                 )}
                             </select>
@@ -100,50 +95,61 @@ const Page = () => {
                     </label>
                     <label className="area">
                         <div className="area--title">
-                            E-mail
+                            Preço
                         </div>
                         <div className="area--input">
-                            <input 
-                                type="email" 
-                                disabled={disabled} 
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                required
+                            <MaskedInput
+                                mask={priceMask}
+                                placeholder="R$ "
+                                disabled={disabled || priceNegotiable}
+                                value={price}
+                                onChange= {e => setPrice(e.target.value)}
                             />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title">
-                            Senha
+                            Preço Negociável
                         </div>
                         <div className="area--input">
                             <input 
-                                type="password" 
+                                type="checkbox" 
                                 disabled={disabled} 
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                required
+                                checked={priceNegotiable}
+                                onChange={e => setPriceNegotiable(!priceNegotiable)}
                             />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title">
-                            Confirmar a Senha
+                            Descrição
+                        </div>
+                        <div className="area--input">
+                            <textarea
+                                disabled={disabled}
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
+                            >
+                            </textarea>
+                        </div>
+                    </label>
+                    <label className="area">
+                        <div className="area--title">
+                            Imagem (1 ou mais)
                         </div>
                         <div className="area--input">
                             <input 
-                                type="password" 
-                                disabled={disabled} 
-                                value={confirmPassword}
-                                onChange={e => setConfirmPassword(e.target.value)}
-                                required
+                                type="file"
+                                disabled={disabled}
+                                ref={fileField}
+                                multiple
                             />
                         </div>
                     </label>
                     <label className="area">
                         <div className="area--title"></div>
                         <div className="area--input">
-                            <button disabled={disabled} >Fazer Cadastro</button>
+                            <button disabled={disabled} >Adicionar anúncio</button>
                         </div>
                     </label>
                 </form>
