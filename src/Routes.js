@@ -4,6 +4,7 @@ import RouterHandler from './components/RouterHandler'
 import Home from './pages/Home'
 import About from './pages/About'
 import NotFound from './pages/NotFound'
+import MyAccount from './pages/MyAccount'
 import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import AdPage from './pages/adPage'
@@ -26,8 +27,8 @@ export default () => {
             <RouterHandler exact path="/ad/:id">
                 <AdPage />
             </RouterHandler>
-            <RouterHandler private exact path="/my-account">
-                <About />
+            <RouterHandler  exact path="/my-account">
+                <MyAccount />
             </RouterHandler>
             <RouterHandler path="*">
                 <NotFound />
