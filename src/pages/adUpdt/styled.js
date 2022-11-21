@@ -1,48 +1,13 @@
 import styled from 'styled-components'
 
 export const PageArea = styled.div`
-    .card-ad {
-    background-color: #FFF;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0px 0px 3px #999;
-    margin-bottom: 20px;
-    max-width: 400px;
-    }
-
-    .area-ad {
-        .area--title-ad {
-            text-align: right;
-            padding-right: 20px;
-            padding-left: 20px;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        .area--text-ad {
-            text-align: right;
-            padding-right: 20px;
-            padding-left: 20px;
-            font-size: 12px;
-        }
-        
-        .list {
-        margin-top: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-    }
-    }
-
     form {
-        margin-top: 20px;
         background-color: #FFF;
         border-radius: 5px;
-        padding: 20px;
+        padding: 10px;
         box-shadow: 0px 0px 3px #999;
         margin-bottom: 20px;
         max-width: 80%;
-
 
         .area {
             display: flex;
@@ -50,7 +15,7 @@ export const PageArea = styled.div`
             padding: 10px;
 
             .area--title {
-                width: 300px;
+                width: 200px;
                 text-align: right;
                 padding-right: 20px;
                 font-weight: bold;
@@ -60,18 +25,24 @@ export const PageArea = styled.div`
             .area--input {
                 flex: 1;
 
-                input {
+                input, select, textarea  {
                     width: 100%;
                     font-size: 14px;
                     padding: 5px;
                     border: 1px solid #DDD;
                     border-radius: 3px;
                     outline: none;
+                    transition: all ease 0.2s;
 
                     &:focus {
                         border: 1px solid #333;
                         color: #333;
                     }
+                }
+
+                textarea {
+                    height: 150px;
+                    resize: none;
                 }
 
                 button {
