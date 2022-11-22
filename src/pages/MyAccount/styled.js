@@ -75,7 +75,7 @@ export const PageArea = styled.div`
                 }
 
                 button {
-                    background-color: #0089FF;
+                    background-color: #2510a3;
                     border: 0;
                     outline: 0;
                     padding: 5px 10px;

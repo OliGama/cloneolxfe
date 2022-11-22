@@ -74,9 +74,7 @@ const Page = () => {
 
     return (
         <PageContainer>
-            <PageTitle TextAlign={'center'} Margin={10 + 'px ' + 0}>
-                Alterar um anuncio
-            </PageTitle>
+            <PageTitle><h3>Alterar um anúncio</h3></PageTitle>
             <PageArea>
                 {error &&
                     <ErrorMessage>
@@ -138,7 +136,7 @@ const Page = () => {
                         <div className="area--title">
                             Preço Negociável
                         </div>
-                        <div className="area--input">
+                        <div className="area-input">
                             <input 
                                 type="checkbox" 
                                 disabled={disabled} 

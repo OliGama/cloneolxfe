@@ -67,7 +67,7 @@ const Page = () => {
 
     return (               
         <PageContainer>
-            <PageTitle>Minha Conta</PageTitle>
+            <PageTitle><h3>Alterar cadastro</h3></PageTitle>
             <PageArea>
                 {error &&
                     <ErrorMessage>

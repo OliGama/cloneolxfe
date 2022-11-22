@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom'
 import RouterHandler from './components/RouterHandler'
 import Home from './pages/Home'
 import About from './pages/About'
+import AdUpdt from './pages/AdUpdt'
 import NotFound from './pages/NotFound'
 import MyAccount from './pages/MyAccount'
 import SignIn from './pages/SignIn'
@@ -28,7 +29,7 @@ export default () => {
                 <AdPage />
             </RouterHandler>
             <RouterHandler exact path="/ad/edit/:id">
-                <adUpdt />
+                <AdUpdt />
             </RouterHandler>
             <RouterHandler  exact path="/my-account">
                 <MyAccount />

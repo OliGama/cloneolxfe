@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 export const PageArea = styled.div`
+    #PageTitle {
+        margin: 10px;
+    }
+    
     form {
         background-color: #FFF;
         border-radius: 5px;
@@ -26,7 +30,7 @@ export const PageArea = styled.div`
                 flex: 1;
 
                 input, select, textarea  {
-                    width: 100%;
+                    width: 50%;
                     font-size: 14px;
                     padding: 5px;
                     border: 1px solid #DDD;
@@ -46,7 +50,7 @@ export const PageArea = styled.div`
                 }
 
                 button {
-                    background-color: #0089FF;
+                    background-color: #2510a3;
                     border: 0;
                     outline: 0;
                     padding: 5px 10px;
